@@ -1,0 +1,16 @@
+1. GitHub Code: https://github.com/HemantGangwar/Ansi...
+2. Building Docker images:
+
+   # docker build -f Dockerfile -t ansible-master .
+   # docker build -f Dockerfile1 -t ansible-slave .
+3. Spinning the containers:
+
+   # docker run -d --privileged --name ansiblemaster ansible-master
+   # docker run -d --privileged --name ansibleslave ansible-slave
+
+4. Identifying IP's to connect:
+
+   # docker inspect ansiblemaster | grep IPAddress
+5. Connecting to docker instance:
+
+  # docker exec -it ansiblemaster /bin/bash

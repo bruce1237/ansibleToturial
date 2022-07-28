@@ -1,0 +1,26 @@
+1. create new ssh key
+	CMD: ssh-keygen -t theKeyType[like:ed25519] -C "putCommentHere"
+2. find the key generated in .ssh folder: id_ed25519 and id_ed25519.pub
+
+3. add sshkey to other servers
+	CMD: ssh-copy-id -i [input file] ./ssh/id_ed25519.pub [IPADDRESS-OF-Target-Server] 172.17.0.4 
+	
+	above command will create authorized_keys into target server .ssh folder, bassic just copy the pub key 
+	into the server and renamed
+4. using ssh connect to server
+	CMD: ssh [target-server-ip] 172.17.0.4
+	
+	tip: ctrl+v to logout
+
+TIPS:
+1.	CMD: ssh -i [indicate which sshKey to use to connect by using the -C comment] putCommentHere 
+2.	for sshkey using phase, put phase into variable
+		CMD: eval $(ssh-agent)
+		CMD: ssh-add  //to add key into ssh-agent
+	then you don't have to put phase eveytime ssh connect till logout from the terminal
+
+3.	Alias command: //create a shortcut to a list of commands 
+		CMD: alias variableName='commands to rung'
+
+
+
