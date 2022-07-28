@@ -1,0 +1,36 @@
+commands:
+
+for Docs: https://docs.ansible.com/ansible/latest/collections
+
+
+1.	CMD: ansible all --key-file sshKeyFile -i inventoryFile -m [m for module] ping [ping each slave]
+
+2.	CMD: ansible all -m gather_facts  
+	//show details across all hosts
+	--limit IPAddressOfHost
+	//show only details of IPAddressedHost
+
+3. how to run command in the slave server in root?
+	CMD: ansible all -m apt -a update_cache --become --ask-become-pass
+	-m: module Name
+	-a: argument for the module
+	--become: become root user
+	--ask-become-pass: ask password for root user
+	
+
+
+create ansible config file
+1.	create config file: ansible.cfg
+
+	ansible.cfg:
+	[defaults]
+	inventory = inventoryFile
+	private_key_file = sshkeyFile
+
+
+install git to slaves
+	CMD: ansible all -m yum -a name=git
+	-m: using yum module, for details please check the url at begining
+	-a: package name = git
+		if more than one arguments: "arg1=val1 arg2=val2"
+	

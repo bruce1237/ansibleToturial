@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: add sudo
+    yum:
+      name: sudo
+      state: latest
+
+
+  - name: Install the latest version of Nano
+    yum:
+      name: nano
+      state: latest
