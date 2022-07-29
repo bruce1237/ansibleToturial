@@ -1,0 +1,8 @@
+[web_servers]
+172.17.0.4 webServer=httpd
+
+[db_servers]
+172.17.0.5 databaseServer=mariadb-server
+
+[file_servers]
+172.17.0.2

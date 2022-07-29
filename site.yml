@@ -1,0 +1,57 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: add essentials sudo, nano, vim
+    yum:
+      name: 
+        - sudo
+        - nano
+        - vim 
+      state: latest
+      update_cache: yes
+      update_only: yes
+
+  - name: remove nano 
+    package:
+      name: 
+        - nano
+      state: removed
+
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install webserver
+    package:
+      name: 
+        - "{{ webServer }}" 
+      state: latest
+      update_cache: yes
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+    - name: install mariadb
+      package:
+        name: 
+          - "{{ databaseServer }}"
+        state: latest
+
+    - name: start "{{ databaseServer }}"
+      service:
+        name: mariadb
+        enabled: yes
+        state: restarted
+
+- hosts: file_servers
+  become: true
+  tasks:
+    - name: install samba package
+      package:
+        name: samba
+        stats: latest
+        
