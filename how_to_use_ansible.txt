@@ -66,3 +66,31 @@ use ansible tags:
 	for multi-tags:
 	e.g. 
 		 ansible-playbook -i grouped_inventory --tags "centos,apache" tag_site.yml
+
+
+Copy file to slave servie
+	files is default folder
+	Direcotry: ./files/default_site.html
+		   ./abc/a.html
+	
+	playbook:
+	 - name: copy default html file to slave
+	   tags: apache,apache2, httpd
+	   copy:
+		src: default_site.html
+	   	dest: /var/www/html/newIndex.html
+           	owner: root
+           	group: root
+           	mode: 0644
+
+	- name: copy default html file to slave
+	  tags: apache,apache2, httpd
+	  copy:
+		src: ./abc/a.html
+		dest: /var/www/html/newIndexa.html
+		owner: root
+		group: root
+		mode: 0644
+
+
+

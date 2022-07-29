@@ -34,6 +34,25 @@
       state: latest
       update_cache: yes
 
+  - name: copy default html file to slave
+    tags: apache,apache2, httpd
+    copy:
+      src: default_site.html
+      dest: /var/www/html/newIndex.html
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: copy default html file to slave
+    tags: apache,apache2, httpd
+    copy:
+      src: ./abc/a.html
+      dest: /var/www/html/newIndexa.html
+      owner: root
+      group: root
+      mode: 0644
+
+
 - hosts: db_servers
   become: true
   tasks:
