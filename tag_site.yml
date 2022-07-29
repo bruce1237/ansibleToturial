@@ -14,6 +14,7 @@
       update_only: yes
 
   - name: remove nano 
+    tags: MV 
     package:
       name: 
         - nano
@@ -25,9 +26,11 @@
   tasks:
 
   - name: install webserver
+    tags: apache,apache2,ubuntu
     package:
       name: 
         - "{{ webServer }}" 
+        - "{{ programLanguage }}"
       state: latest
       update_cache: yes
 
@@ -36,6 +39,7 @@
   tasks:
 
     - name: install mariadb
+      tags: centos,db,mariadb
       package:
         name: 
           - "{{ databaseServer }}"
@@ -52,6 +56,7 @@
   become: true
   tasks:
     - name: install samba package
+      tags: samba
       package:
         name: samba
         stats: latest

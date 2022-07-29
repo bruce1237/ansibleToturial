@@ -1,0 +1,68 @@
+commands:
+
+for Docs: https://docs.ansible.com/ansible/latest/collections
+
+
+1.      CMD: ansible all --key-file sshKeyFile -i inventoryFile -m [m for module] ping [ping each slave]
+
+2.      CMD: ansible all -m gather_facts
+        //show details across all hosts
+        --limit IPAddressOfHost
+        //show only details of IPAddressedHost
+
+3. how to run command in the slave server in root?
+        CMD: ansible all -m apt -a update_cache --become --ask-become-pass
+        -m: module Name
+        -a: argument for the module
+        --become: become root user
+        --ask-become-pass: ask password for root user
+
+
+
+create ansible config file
+1.      create config file: ansible.cfg
+
+        ansible.cfg:
+        [defaults]
+        inventory = inventoryFile
+        private_key_file = sshkeyFile
+
+
+install git to slaves
+        CMD: ansible all -m yum -a name=git
+        -m: using yum module, for details please check the url at begining
+        -a: package name = git
+                if more than one arguments: "arg1=val1 arg2=val2"
+
+gether inforation about slave
+        CMD: ansible all -m gather_facts --limit[target slave] slaveIPAddress
+        this will show some ansible built in variables and values
+
+
+
+check ansible tags:
+	CMD: ansible-playbook --list-tags playbook.yml
+	this will list all the tags in the playbook
+	e.g.:
+	
+	playbook: tag_site.yml
+
+	  play #1 (all): all    TAGS: []
+	      TASK TAGS: [always]
+
+	  play #2 (web_servers): web_servers    TAGS: []
+	      TASK TAGS: [apache, apache2, ubuntu]
+
+	  play #3 (db_servers): db_servers      TAGS: []
+	      TASK TAGS: [centos, db, mariadb]
+
+	  play #4 (file_servers): file_servers  TAGS: []
+	      TASK TAGS: [samba]
+
+use ansible tags:
+	CMD: ansible-playbook --tags tagName playbook.yml	
+	e.g. 
+		 ansible-playbook -i grouped_inventory --tags centos tag_site.yml
+	for multi-tags:
+	e.g. 
+		 ansible-playbook -i grouped_inventory --tags "centos,apache" tag_site.yml

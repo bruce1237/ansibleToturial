@@ -1,8 +1,8 @@
 [web_servers]
-172.17.0.4 webServer=httpd
+172.17.0.4 webServer=httpd programLanguage=php
 
 [db_servers]
-172.17.0.5 databaseServer=mariadb-server
+172.17.0.5 databaseServer=mariadb-server databaseClient=mariadb
 
 [file_servers]
 172.17.0.2
