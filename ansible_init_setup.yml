@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: update repository index
+    yum:
+      update_cache: yes
+
+  - name: add sudo
+    yum:
+      name: sudo
+      state: latest
+        
+  - name: Install the latest version of Nano
+    yum:
+      name: nano
+      state: latest
+
+  - name: remove nano
+    yum:
+      name: nano
+      state: removed 
+   
