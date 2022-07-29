@@ -34,3 +34,6 @@ install git to slaves
 	-a: package name = git
 		if more than one arguments: "arg1=val1 arg2=val2"
 	
+gether inforation about slave
+	CMD: ansible all -m gather_facts --limit[target slave] slaveIPAddress
+	this will show some ansible built in variables and values
