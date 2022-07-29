@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: add sudo, nano, vim
+    yum:
+      name: 
+        - sudo
+        - nano
+        - vim 
+      state: latest
+      update_cache: yes
+    when: ansible_distribution in ["CentOS","Debian"]

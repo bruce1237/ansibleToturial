@@ -1,0 +1,12 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install text editor and webServer
+    package: #this is the ansible built in variable for apt yum etc..
+      name: 
+        - {{ texteditor }}
+        - {{ webServer }}
+      state: latest
+      update_cache: yes
