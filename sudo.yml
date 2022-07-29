@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: add essentials sudo, nano, vim
+    package:
+      name: 
+        - sudo
+        - nano
+        - vim 
+      state: latest
+      update_cache: yes
+      update_only: yes
+
