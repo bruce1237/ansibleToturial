@@ -53,6 +53,30 @@
       state: latest
       update_cache: yes
 
+  - name: start webserver
+    tags: apache,apache2,ubuntu
+    service:
+      name: "{{ webServer }}"
+      state: started #change the httpd to started status, means start httpd service
+      enabled: yes # auto-start httpd when server is up
+
+  - name: change e-mail address for admin (require server restart)
+    tags: apache, apache2, ubuntu
+    lineinfile: 
+      path: /etc/httpd/conf/httpd.conf
+      regexp: '^ServerAdmin'
+      line: thisAdmin@web.com
+    register: Myhttpd
+
+  - name: restart "{{ webServer }}"
+    tags: apache, apache2, httpd
+    service:
+      name: "{{ webServer }}"
+      state: restarted
+    when: Myhttpd.changed
+
+
+
   - name: copy default html file to slave
     tags: apache,apache2, httpd
     copy:

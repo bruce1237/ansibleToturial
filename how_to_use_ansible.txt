@@ -94,3 +94,11 @@ Copy file to slave servie
 
 
 
+how to start / stop services in the slave:
+	in play-book:
+	stats: started | stopped ..
+	enabled: yes  //auto-start when server is up
+
+how to restart service in slave:
+	in play-book:
+
