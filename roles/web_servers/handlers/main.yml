@@ -1,0 +1,9 @@
+- name: remove_APACHE
+  service:
+    name: "{{ apache_service }}"
+    state: removed
+
+- name: RE-install_APACHE
+  service:
+    name: "{{ apache_service }}"
+    state: latest

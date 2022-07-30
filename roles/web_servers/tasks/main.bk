@@ -19,9 +19,15 @@
   lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^ServerAdmin'
-    line: MMMMMMAdmin@web.com
-  notify: remove_APACHE  #if this play make any change, then will run notify task by looking for the handlers folder
+    line: thisAdmin@web.com
+  register: Myhttpd
 
+- name: restart "{{ apache_service }}"
+  tags: apache, apache2, httpd
+  service:
+    name: "{{ apache_service }}"
+    state: restarted
+  when: Myhttpd.changed
 
 
 
