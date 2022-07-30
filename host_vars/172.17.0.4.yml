@@ -1,2 +1,4 @@
 databaseServer: mariadb-server 
 databaseClient: mariadb
+ssh_users: "jay simone"
+ssh_template_file:  sshd_config_centos.j2
