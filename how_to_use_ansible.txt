@@ -102,3 +102,42 @@ how to start / stop services in the slave:
 how to restart service in slave:
 	in play-book:
 
+
+how to check server / slave uptime:
+	CMD: ansible -i inventory ipORgroupName -a uptime
+	ipORgroupName is in the inventory file
+
+how to check server / slave memory:
+	CMD: ansible -i grouped_inventory workstations -a "free -m"
+
+how to add user / group to slave:
+	CMD: ansible# ansible -i grouped_inventory web_servers -m user -a "name=user2 createhome=yes" -b
+	-m user: using user module
+	-a: [-a means options] indicates certain options that are passing to create user by specify user name and createhome = yes
+
+
+how to create directory in slave:
+	CMD:  ansible -i grouped_inventory workstations -m file -a 'path=/home/ubuntu state=directory mode=755' -b
+	-a: options for -m module
+	-b: I think means --become  using root
+	NOTE: the directory created is under the name of root 
+
+
+
+how to create file in slave:
+	CMD: ansible -i grouped_inventory web_servers -m file -a 'path=/home/ubuntu/test.txt state=touch mode=755' -b
+
+
+aaPanel:
+Install:
+	CMD: wget -O install.sh http://www.aapanel.com/script/install-ubuntu_6.0_en.sh && sudo bash install.sh
+
+Access:
+
+aaPanel Internet Address: https://90.243.242.132:7800/316aee41
+aaPanel Internal Address: https://172.17.0.2:7800/316aee41
+username: k4eznuof
+password: efbca888
+Warning:
+If you cannot access the panel,
+release the following port (7800|888|80|443|20|21) in the security group
